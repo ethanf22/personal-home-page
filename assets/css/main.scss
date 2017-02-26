@@ -1,0 +1,7 @@
+.show-on-hover{
+  opacity: .2;
+
+  &:hover, &:active{
+    opacity: 1;
+  }
+}

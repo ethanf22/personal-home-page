@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/main.css">
+	<script src="https://use.fontawesome.com/ebdc84d899.js"></script>
+</head>
+<body>
+	<nav class="navbar sticky-top navbar-inverse bg-inverse">
+		<form class="form-inline" action="/bookmark" method="post">
+			<select class="form-control mr-sm-2" name="category_id">
+				<% for(var i=0; i < categories.length; i++ ) { %>
+					<option value="<%= categories[i].id %>"><%= categories[i].title %></option>
+				<% } %>
+			</select>
+			<input class="form-control mr-sm-2" type="text" name="title" placeholder="Title">
+			<input class="form-control mr-sm-2" type="text" name="url" placeholder="Url">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Bookmark</button>
+		</form>
+	</nav>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<% for(i=0; i < categories.length; i++ ) { %>
+				<div class="col">
+					<h3 class="mt-4 text-center"><%= categories[i].title %></h3>
+					<% if( typeof bookmarks[ categories[i].id ] != 'undefined' ) { %>
+						<div class="card">
+							<ul class="list-group list-group-flush link-list">
+								<% for(var j=0; j < bookmarks[ categories[i].id ].length; j++ ) { %>
+									<li class="list-group-item link-wrapper" data-bookmark-id="<%= bookmarks[ categories[i].id ][j].id %>">
+										<a href="<%= bookmarks[ categories[i].id ][j].url %>" target="_blank">
+											<%= bookmarks[ categories[i].id ][j].title %>
+										</a>
+										<form action="/remove-bookmark" method="post" style="position: absolute; right: 20px;">
+											<input type="hidden" name="id" value="<%= bookmarks[ categories[i].id ][j].id %>">
+											<button type="submit" class="btn btn btn-outline-danger btn-sm show-on-hover remove-bookmark">
+												<i class="fa fa-times"></i>
+											</button>
+										</form>
+									</li>
+								<% } %>
+							</ul>
+						</div>
+					<% } %>
+				</div>
+			<% }%>
+		</div>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script src="/sortablejs/Sortable.min.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+</html>
