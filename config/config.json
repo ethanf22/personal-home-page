@@ -1,0 +1,6 @@
+{
+  "development": {
+    "storage": "./bookmarks.db",
+    "dialect": "sqlite"
+  }
+}
