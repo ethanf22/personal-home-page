@@ -1,6 +1,8 @@
+"use strict";
+
 module.exports = function(sequelize, DataTypes)
 {
-	return sequelize.define('bookmarks', {
+	let Bookmark = sequelize.define('Bookmark', {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true
@@ -17,5 +19,10 @@ module.exports = function(sequelize, DataTypes)
 		ordinal: {
 			type: DataTypes.INTEGER
 		}
+	}, {
+		tableName: 'bookmarks',
+		timestamps: false
 	});
+
+	return Bookmark;
 };

@@ -1,6 +1,8 @@
+"use strict";
+
 module.exports = function(sequelize, DataTypes)
 {
-	return sequelize.define('categories', {
+	let Category = sequelize.define('Category', {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true
@@ -8,5 +10,10 @@ module.exports = function(sequelize, DataTypes)
 		title: {
 			type: DataTypes.STRING
 		}
+	}, {
+		tableName: 'categories',
+		timestamps: false
 	});
+
+	return Category;
 };
